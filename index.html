@@ -1,22 +1,526 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Form Example</title>
-</head>
-<body>
-    <h1>Form Example</h1>
-    <form action="process_form.php" method="post">
+
+
+
+<html><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CodePen - A Pen by David</title>
+  <link rel="stylesheet" href="./style.css">
+<style>
+@charset "UTF-8";
+@import url(https://static2.sharepointonline.com/files/fabric/office-ui-fabric-js/1.4.0/css/fabric.min.css);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 11pt;
+  color: #333;
+  height: 100%;
+}
+
+#app-wrapper {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+#app-header {
+  flex: 0 0 48px;
+  width: 100%;
+  background-color: #307bb5;
+  color: #fff;
+  font-size: 10pt;
+  padding: 0px;
+  margin: 0px;
+  display: flex;
+  flex-flow: row;
+}
+#app-header .app-header {
+  position: relative;
+  vertical-align: middle;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+#app-header .app-header .app-content {
+  margin: 0px;
+  padding: 0px 15px 0px 15px;
+  position: relative;
+  height: 48px;
+  line-height: 48px;
+  min-width: 48px;
+  flex: 0 0 48px;
+  transition: all 0.2s;
+}
+#app-header .app-header .app-content:hover {
+  background-color: #222;
+}
+#app-header .app-header .app-content i {
+  font-size: 11pt;
+  padding-left: 1px;
+  padding-top: 1px;
+}
+#app-header .app-header .app-content.active {
+  background-color: #222;
+}
+#app-header .app-header.app-header-main {
+  border-left: 0px;
+}
+#app-header .app-header.app-header-main .app-content {
+  padding: 0px;
+  text-align: center;
+}
+#app-header .app-header.app-header-main .app-content i {
+  font-size: 16pt;
+}
+#app-header .app-header.app-header-module {
+  font-size: 15pt;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+#app-header .app-header.app-header-module .app-content {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#app-header .app-header.app-header-breadcrumb {
+  font-size: 10pt;
+  pointer-events: none;
+  flex: 1 1;
+  overflow: hidden;
+  white-space: nowrap;
+}
+#app-header .app-header.app-header-breadcrumb .app-content {
+  padding-top: 1px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#app-header .app-header.app-header-company {
+  border: 0px;
+}
+#app-header .app-header.app-header-company .app-content {
+  padding-top: 2px;
+}
+#app-header .app-header.app-header-user {
+  font-size: 10pt;
+}
+#app-header .app-header.app-header-user .app-content span {
+  margin-left: -7px !important;
+  margin-right: -7px !important;
+  display: inline-block;
+  margin-top: -5px;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  vertical-align: middle;
+  text-align: center;
+  background-color: #d07;
+}
+#app-header .app-header.app-header-more {
+  display: none;
+  max-width: 48px;
+}
+#app-header .app-header.app-header-more i {
+  font-size: 16pt;
+  padding: 0px;
+}
+@media screen and (max-width: 960px) {
+  #app-header .app-header.app-header-title, #app-header .app-header.app-header-settings, #app-header .app-header.app-header-help, #app-header .app-header.app-header-user {
+    display: none;
+  }
+  #app-header .app-header.app-header-main .app-content {
+    background-color: #000 !important;
+  }
+  #app-header .app-header.app-header-main .app-content:hover {
+    background-color: #444 !important;
+  }
+  #app-header .app-header.app-header-more {
+    display: inline;
+  }
+}
+@media screen and (max-width: 640px) {
+  #app-header .app-header.app-header-module {
+    flex: 1 1 auto;
+    overflow: hidden;
+  }
+  #app-header .app-header.app-header-breadcrumb {
+    display: none;
+  }
+  
+}
+
+#app-container {
+  display: flex;
+  flex-flow: row;
+  height: 100%;
+}
+#app-container #app-main {
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  overflow: auto;
+  margin-left: 0px;
+  background-color: #f5f5f5;
+  transition: margin-left 0.1s;
+}
+#app-container #app-main .mainMenu {
+  flex: 0 0 50px;
+  overflow: hidden;
+  padding: 20px 30px 30px 30px;
+  vertical-align: middle;
+  height: 30px;
+  vertical-align: middle;
+  background: #fff;
+  border-bottom: 1px solid #e8e8e8;
+}
+#app-container #app-main .mainMenu .company {
+  font-size: 12pt;
+  font-weight: bold;
+  display: inline-block;
+  vertical-align: middle;
+  padding-right: 20px;
+  height: 20px;
+}
+#app-container #app-main .mainMenu .menuItems {
+  display: inline-block;
+  vertical-align: middle;
+  height: 20px;
+  font-size: 9pt;
+  border-left: 1px solid gray;
+}
+#app-container #app-main .mainMenu .menuItems li {
+  display: inline-block;
+  padding-left: 20px;
+}
+#app-container #app-main .content {
+  flex: 1 1 auto;
+  overflow: auto;
+  padding: 0px 30px 30px 30px;
+  margin: 3px;
+}
+
+.tooltip .tooltip-panel {
+  visibility: hidden;
+  min-width: 120px;
+  background-color: #fff;
+  color: #555;
+  border: 2px solid #555;
+  margin: 0px;
+  padding: 5px 10px 5px 10px;
+  line-height: 20px;
+  font-family: Arial;
+  font-size: 8pt;
+  transition: visibility 0s;
+  position: fixed;
+  z-index: 1;
+}
+.tooltip .tooltip-panel label {
+  display: block;
+  white-space: nowrap;
+}
+.tooltip .tooltip-panel .caption {
+  font-weight: bold;
+}
+.tooltip:hover .tooltip-panel {
+  visibility: visible;
+  transition: visibility 0s linear 1s, opacity 0.3s linear;
+}
+
+.scroll-style::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+.scroll-style::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background-color: #999;
+}
+.scroll-style::-webkit-scrollbar-thumb:hover {
+  background-color: #777;
+}
+.menu-item {
+  font-size: 11pt;
+  cursor: pointer;
+  padding: 8px;
+  margin-right: 10px;
+  margin-left: 5px;
+  transition: all 0.1s;
+  display: block;
+}
+.menu-item:hover {
+  background-color: #c2dbef;
+}
+.menu-item:before {
+  font-family: FabricMDL2Icons;
+  font-size: 7pt;
+  content: "";
+  padding-right: 10px;
+}
+.menu-item.selected {
+  background-color: #86b8df;
+}
+
+.menu-group {
+  padding: 0px 10px 0px 5px;
+  font-size: 11pt;
+}
+.menu-group .menu-group-header {
+  padding: 8px;
+  cursor: pointer;
+}
+.menu-group .menu-group-header:hover {
+  background-color: #c2dbef;
+}
+.menu-group.expanded .menu-group-header:before {
+  font-family: FabricMDL2Icons;
+  font-size: 7pt;
+  content: "";
+  padding-right: 10px;
+}
+.menu-group.collapsed .menu-group-header:before {
+  font-family: FabricMDL2Icons;
+  font-size: 10pt;
+  content: "";
+  padding-right: 5px;
+}
+.menu-group.collapsed .menu-item {
+  height: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  overflow: hidden;
+}
+.menu-group .menu-item {
+  margin-left: 30px;
+  margin-right: 0px;
+  padding: 6px;
+  cursor: pointer;
+  font-size: 9pt;
+}
+.menu-group .menu-item:hover {
+  background-color: #c2dbef;
+}
+.menu-group .menu-item:before {
+  content: "";
+}
+    @media only screen and (max-width: 600px) {
+        #myForm {
+            width: 100%;
+            padding: 10px;
+        }
+    }
+        /* CSS styles for the form container */
+    #formContainer {
+        width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        background-color: #f9f9f9;
+    }
+
+    /* CSS styles for the form labels */
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    /* CSS styles for the form input fields */
+    input[type="email"] {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    /* CSS styles for the checkbox label */
+    label[for="hasWhatsapp"] {
+        font-weight: normal;
+    }
+
+    /* CSS styles for the submit button */
+    input[type="submit"] {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+</style>
+<meta></head>
+<body class="ms-Fabric theme-blue" onfocusout="parent.setEmailRange();" style="overflow-wrap: break-word;">
+<!-- partial:index.partial.html -->
+
+	<div id="app-wrapper">
+		<div id="app-header">
+      
+		  <div class="app-header app-header-main">
+			  <div class="app-content">
+      		<i class="ms-Icon ms-Icon--Waffle"></i>
+        </div>
+    	</div>
+     
+      <div class="app-header app-header-breadcrumb ms-font-m">
+        <div class="app-content">
+          <label>Dynamics 365</label>
+        </div>
+    	</div>
+      
+    <div class="app-header app-header-search">
+			<div class="app-content" tag="panel-search">
+				<i class="ms-Icon ms-Icon--Search"></i>
+			</div>
+		
+    	</div><div class="app-header app-header-settings">
+			<div class="app-content" tag="panel-settings">
+				<i class="ms-Icon ms-Icon--Settings"></i>
+			</div>
+			
+    	</div><div class="app-header app-header-help">
+			<div class="app-content" tag="panel-help">
+				<i class="ms-Icon ms-Icon--Help"></i>
+			</div>
+		
+    	</div><div class="app-header app-header-user ms-font-m tooltip">
+      	<div class="app-content" tag="panel-user">
+				<img alt="Roei Redler Demo - roei" src="https://i.pinimg.com/originals/e9/ae/33/e9ae3302f088c652025e0fb139f1e706.png" class="app-content">
+      	</div>
+		
+    	</div><div class="app-header app-header-more ms-font-m tooltip">
+      	<div class="app-content" tag="panel-more">
+				<i class="ms-Icon ms-Icon--More"></i>
+      	</div>
+    	</div>
+		</div>
+    
+		<div id="app-container">
+			<div id="app-main">
+				<div class="mainMenu">
+          <span class="company">
+          CONTOSO
+          </span><span class="menuItems">
+            <li>Finanzas</li>
+            <li>Tesorería</li>
+            <li>Ventas</li>
+            <li>Compras</li>
+          </span>
+				</div>
+				<div class="content scroll-style">
+					<span class="ms-font-su">Archivos</span>
+
+
+
+  <title>Inline CSS Form</title>
+
+
+<div id="formContainer">
+    <form id="myForm" method="post" onsubmit="handleSubmit(event)">
         <label for="email">Email:</label>
         <input type="email" name="email" id="email" required>
         <br>
         <label for="hasWhatsapp">
-            <input type="checkbox" name="hasWhatsapp" id="hasWhatsapp" value="true"> I want WhatsApp
+            <input type="checkbox" name="hasWhatsapp" id="hasWhatsapp" value="true"> I have WhatsApp
         </label>
         <br>
         <input type="submit" value="Submit">
     </form>
-    <script src="https://mktdplp102cdn.azureedge.net/public/latest/js/form-loader.js?v=1.84.2007"></script> <div class="d365-mkt-config" style="display:none" data-website-id="LTx9Yt_pguokb5VrJDpvCqJTtJItqATP19cLGvc7wxo" data-hostname="118393beccfa4f9da7f32cecb81293ce.svc.dynamics.com"> </div>
+</div>
 
-</body>
-</html>
+  <script>
+    document.getElementById('myForm').addEventListener('submit', function(e) {
+      e.preventDefault(); // Prevent form submission
+
+      // Get form data
+      var formData = new FormData(this);
+      var jsonData = {};
+
+      // Convert form data to JSON object
+      formData.forEach(function(value, key) {
+        jsonData[key] = value;
+      });
+
+      // Send JSON data via POST request
+      fetch('', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(jsonData)
+      })
+      .then(function(response) {
+        // Handle response
+        console.log(response);
+        // Add your own code here to handle the response
+
+        return response.text(); // Extract response as text
+      })
+      .then(function(responseText) {
+        // Display response message
+        document.getElementById('responseMessage').textContent = responseText;
+        document.getElementById('myForm').reset();
+      })
+      .catch(function(error) {
+        // Handle error
+        console.error(error);
+      });
+    });
+    // Function to handle the screen width change
+function handleScreenWidthChange(mediaQuery) {
+  const appMenu = document.querySelector('#app-container #app-main .mainMenu');
+
+  if (mediaQuery.matches) {
+    // Screen width is less than 433px
+    appMenu.style.flex = '0 0 70px';
+  } else {
+    // Screen width is greater than or equal to 433px
+    appMenu.style.flex = '';
+  }
+}
+
+// Create a media query for screen width less than 433px
+const mediaQuery = window.matchMedia('(max-width: 433px)');
+
+// Call the handler initially to apply the styles based on the current screen width
+handleScreenWidthChange(mediaQuery);
+
+// Add event listener for screen width changes
+mediaQuery.addListener(handleScreenWidthChange);
+        function clearForm() {
+            document.getElementById("email").value = "";
+            document.getElementById("hasWhatsapp").checked = false;
+        }
+
+        function displaySuccessMessage() {
+            var successMessage = document.createElement("p");
+            successMessage.textContent = "Form submitted successfully!";
+            successMessage.style.color = "green";
+            document.getElementById("formContainer").insertBefore(successMessage, document.getElementById("myForm"));
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault(); // Prevent form submission
+            displaySuccessMessage();
+            clearForm();
+        }
+        <script src="https://mktdplp102cdn.azureedge.net/public/latest/js/form-loader.js?v=1.84.2007"></script> <div class="d365-mkt-config" style="display:none" data-website-id="LTx9Yt_pguokb5VrJDpvCqJTtJItqATP19cLGvc7wxo" data-hostname="118393beccfa4f9da7f32cecb81293ce.svc.dynamics.com"> </div>
+
+  </script>
+
+
+                    
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+  
+
+
+</body><!-- partial --></html>
