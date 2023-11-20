@@ -433,7 +433,7 @@ html, body {
 </div>
 
   <script>
-    document.getElementById('myForm3').addEventListener('submit', function(e) {
+    document.getElementById('myForm').addEventListener('submit', function(e) {
       e.preventDefault(); // Prevent form submission
 
       // Get form data
@@ -446,7 +446,7 @@ html, body {
       });
 
       // Send JSON data via POST request
-      fetch('', {
+      fetch('https://roeiredlerabra.github.io/submit/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
