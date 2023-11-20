@@ -433,7 +433,45 @@ html, body {
 </div>
 
   <script>
-    
+    document.getElementById('myForm').addEventListener('submit', function(e) {
+      e.preventDefault(); // Prevent form submission
+
+      // Get form data
+      var formData = new FormData(this);
+      var jsonData = {};
+
+      // Convert form data to JSON object
+      formData.forEach(function(value, key) {
+        jsonData[key] = value;
+      });
+
+      // Send JSON data via POST request
+      fetch('https://webhook.site/37a89988-69b8-4a1a-bcb1-8966d3cd11c2', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(jsonData)
+      })
+      .then(function(response) {
+        // Handle response
+        console.log(response);
+        // Add your own code here to handle the response
+
+        return response.text(); // Extract response as text
+	      
+      })
+      .then(function(responseText) {
+        // Display response message
+        document.getElementById('responseMessage').textContent = responseText;
+        document.getElementById('myForm').reset();
+      })
+	      
+      .catch(function(error) {
+        // Handle error
+        console.error(error);
+      });
+    });
 	  
     // Function to handle the screen width change
 function handleScreenWidthChange(mediaQuery) {
@@ -457,10 +495,6 @@ handleScreenWidthChange(mediaQuery);
 // Add event listener for screen width changes
 mediaQuery.addListener(handleScreenWidthChange);
 
-        function clearForm() {
-            document.getElementById("email").value = "";
-            document.getElementById("hasWhatsapp").checked = false;
-        }
 
         function displaySuccessMessage() {
             var successMessage = document.createElement("p");
@@ -471,8 +505,7 @@ mediaQuery.addListener(handleScreenWidthChange);
 
         function handleSubmit(event) {
             event.preventDefault(); // Prevent form submission
-            displaySuccessMessage();
-            clearForm();
+            displaySuccessMessage();            
         }
         
   </script>
