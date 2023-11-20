@@ -459,17 +459,20 @@ html, body {
         // Add your own code here to handle the response
 
         return response.text(); // Extract response as text
+	      
       })
       .then(function(responseText) {
         // Display response message
         document.getElementById('responseMessage').textContent = responseText;
         document.getElementById('myForm').reset();
       })
+	      
       .catch(function(error) {
         // Handle error
         console.error(error);
       });
     });
+	  
     // Function to handle the screen width change
 function handleScreenWidthChange(mediaQuery) {
   const appMenu = document.querySelector('#app-container #app-main .mainMenu');
@@ -491,10 +494,7 @@ handleScreenWidthChange(mediaQuery);
 
 // Add event listener for screen width changes
 mediaQuery.addListener(handleScreenWidthChange);
-        function clearForm() {
-            document.getElementById("email").value = "";
-            document.getElementById("hasWhatsapp").checked = false;
-        }
+
 
         function displaySuccessMessage() {
             var successMessage = document.createElement("p");
@@ -505,8 +505,7 @@ mediaQuery.addListener(handleScreenWidthChange);
 
         function handleSubmit(event) {
             event.preventDefault(); // Prevent form submission
-            displaySuccessMessage();
-            clearForm();
+            displaySuccessMessage();            
         }
         
   </script>
