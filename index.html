@@ -435,7 +435,7 @@ html, body {
   <script>
     document.getElementById('myForm').addEventListener('submit', function(e) {
       e.preventDefault(); // Prevent form submission
-
+      window.location.href = 'index.html';
       // Get form data
       var formData = new FormData(this);
       var jsonData = {};
@@ -456,7 +456,7 @@ html, body {
       .then(function(response) {
         // Handle response
         console.log(response);
-	window.location.href = 'index.html';
+	
         // Add your own code here to handle the response
 
         return response.text(); // Extract response as text
